@@ -18,3 +18,13 @@ app.post('/store-coords', (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.get('/show-coords', (req, res) => {
+  const file = 'coordinates.txt';
+  if (fs.existsSync(file)) {
+    const data = fs.readFileSync(file, 'utf-8');
+    res.send(`<pre>${data}</pre>`);
+  } else {
+    res.send('No coordinates stored yet.');
+  }
+});
+
